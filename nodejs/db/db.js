@@ -1,6 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
-
-const DBSource = 'DB.db';
+const DBSource = './db/mat.db3';
 
 const db = new sqlite3.Database(DBSource,(err) => {
   if(err){
