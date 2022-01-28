@@ -12,8 +12,8 @@ gastn.get('/:id', (req, res) => {
 gastn.post('/', function(req, res) {
     gastnDB.addGastn(req.body, res);
 })
-gastn.put('/user', function (req, res) {
-    res.send('Got a PUT request at /user')
+gastn.put('/', function (req, res) {
+    gastnDB.updGastn(req.body, res);
 })
 gastn.delete('/:id', function (req, res) {
     gastnDB.delGastn(req.params.id, res);
