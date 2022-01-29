@@ -1,5 +1,5 @@
 export class MatGast{
-  id?:number;
+  id?:any;
   codigo?:string;
   description?:string;
   um?:string;

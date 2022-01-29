@@ -3,7 +3,7 @@
 <div *ngIf= "!add && !editar && !eliminar">
   <div>
     <button (click) = "add = true">Adicionar</button>
-    <button [disabled]= "currentIndex === -1" (click)= "eliminar = true" >Eliminar</button>
+    <button [disabled]= "currentIndex === -1" (click)= "delete()" >Eliminar</button>
     <button [disabled]= "currentIndex === -1" (click)= "editar = true" >Editar</button>
   </div>
   <table>
@@ -20,7 +20,7 @@
     <td>{{list.description}}</td>
     <td>{{list.um}}</td>
     <td>{{list.precio}}</td>
-    <td [class.active]="i == currentIndex" (click) = "currentIndex = i"><input type="checkbox" [disabled] = /></td>
+    <td [class.active]="i == currentIndex" (click) = "setActiveMatGast(list,i)"><input type="checkbox" [disabled] = /></td>
   </tbody>
   <br/>
 </table>
@@ -30,10 +30,10 @@
 </div>
 <div *ngIf= "editar">
   wiiiii editar
-  <button (click)= "editar = false">Back</button>
+  <button (click)= "redirectL()">Back</button>
 </div>
 
 <div *ngIf= "eliminar">
   wiiiii eliminar
-  <button (click)= "eliminar = false">Back</button>
+  <button (click)= "redirectL()">Back</button>
 </div>
