@@ -6,7 +6,6 @@ const readAll = (res) => {
     if(err){
       console.log(err);
       res.status(400).send(err);
-      throw err;
     }
     res.json(data);
   })
@@ -18,7 +17,6 @@ const getById = (res,id) => {
     if (err) {
       console.log(err);
       res.status(400).send(err);
-      throw err;
     }
     res.json(row);
   });
@@ -32,7 +30,6 @@ const addGastn = (data , res) => {
     if (err) {
       console.log(err);
       res.status(400).send(err);
-      throw err;
     }
     res.json(this.lastID);
   })
@@ -46,7 +43,6 @@ const updGastn = (data , id , res) => {
     if (err) {
       console.log(err);
       res.status(400).send(err);
-      throw err;
     }
     res.json(this.changes);
   })
