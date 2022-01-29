@@ -1,0 +1,27 @@
+
+
+<div *ngIf= "!add">
+  <div>
+    <button (click) = "add = true">Adicionar</button>
+  </div>
+<div *ngFor= "let list of lists">
+  <table>
+  <thead>
+    <th>Codigo</th>
+    <th>Descripcion</th>
+    <th>Um</th>
+    <th>Precio</th>
+  </thead>
+  <tbody>
+    <td>{{list.codigo}}</td>
+    <td>{{list.description}}</td>
+    <td>{{list.um}}</td>
+    <td>{{list.precio}}</td>
+  </tbody>
+  <br/>
+</table>
+</div>
+</div>
+<div *ngIf = "add">
+  <app-add-mg></app-add-mg>
+</div>
