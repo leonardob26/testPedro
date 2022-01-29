@@ -1,27 +1,39 @@
 
 
-<div *ngIf= "!add">
+<div *ngIf= "!add && !editar && !eliminar">
   <div>
     <button (click) = "add = true">Adicionar</button>
+    <button [disabled]= "currentIndex === -1" (click)= "eliminar = true" >Eliminar</button>
+    <button [disabled]= "currentIndex === -1" (click)= "editar = true" >Editar</button>
   </div>
-<div *ngFor= "let list of lists">
   <table>
   <thead>
     <th>Codigo</th>
     <th>Descripcion</th>
     <th>Um</th>
     <th>Precio</th>
+    <th><input type="checkbox" disabled/></th>
   </thead>
-  <tbody>
+
+  <tbody *ngFor= "let list of lists;let i = index">
     <td>{{list.codigo}}</td>
     <td>{{list.description}}</td>
     <td>{{list.um}}</td>
     <td>{{list.precio}}</td>
+    <td [class.active]="i == currentIndex" (click) = "currentIndex = i"><input type="checkbox" [disabled] = /></td>
   </tbody>
   <br/>
 </table>
 </div>
-</div>
 <div *ngIf = "add">
   <app-add-mg></app-add-mg>
+</div>
+<div *ngIf= "editar">
+  wiiiii editar
+  <button (click)= "editar = false">Back</button>
+</div>
+
+<div *ngIf= "eliminar">
+  wiiiii eliminar
+  <button (click)= "eliminar = false">Back</button>
 </div>

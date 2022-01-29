@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatGast } from 'src/app/model/MatGast.model';
+import { MatGastService } from 'src/app/services/mat-gast.service';
 
 @Component({
   selector: 'app-add-mg',
@@ -6,14 +8,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-mg.component.css']
 })
 export class AddMGComponent implements OnInit {
-
-  constructor() { }
+  matGast:MatGast = {
+    codigo:'',
+    description:'',
+    um:'',
+    precio:0
+  }
+  
+  constructor(private add:MatGastService) { }
 
   ngOnInit(): void {
   }
 
   redirectL(){
     window.location.href= 'http://localhost:4200/'
+  }
+
+  submit(){
+    const data = {
+      codigo: this.matGast.codigo,
+      description:this.matGast.description,
+      um:this.matGast.um,
+      precio:this.matGast.precio
+    }
+
+    console.log(JSON.stringify(this.matGast));
+    this.add.createMG(data).subscribe({
+      next: (res:any) => {
+        console.log(res);
+        
+      },
+      error: (e:any) => console.error(e)
+    });
+    this.redirectL();
   }
 
 }

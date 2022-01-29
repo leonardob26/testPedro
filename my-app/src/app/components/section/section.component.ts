@@ -9,11 +9,15 @@ import { MatGastService } from 'src/app/services/mat-gast.service';
 })
 export class SectionComponent implements OnInit {
   add:boolean = false;
+  editar:boolean = false;
+  eliminar:boolean = false;
   lists:MatGast[] = [];
+  currentIndex = -1;
   constructor( private fetchMG: MatGastService) { }
 
   ngOnInit(): void {
     this.fetchMG.readAll().subscribe(data=>this.lists = data);
   }
+
 
 }
