@@ -8,25 +8,25 @@ const readAll = (res) => {
       res.status(400).send(err);
       throw err;
     }
-    res.send(data);
+    res.json(data);
   })
 }
 
 const getById = (res,id) => {
-  const sql = "SELECT * FROM gast WHERE id = $1";
+  const sql = "SELECT * FROM gast WHERE id = ?";
   db.get(sql, [id], (err, row) => {
     if (err) {
       console.log(err);
       res.status(400).send(err);
       throw err;
     }
-    row?res.json(row):res.status(404).send("User Not Found !!!!");
+    res.json(row);
   });
 }
 
 const addGastn = (data , res) => {
   const {codigo, description, um, precio} = data;
-  const sql = "INSERT INTO gast (codigo, description, um, precio) VALUES ($1,$2,$3,$4)";
+  const sql = "INSERT INTO gast (codigo, description, um, precio) VALUES (?,?,?,?)";
 
   db.run(sql,[codigo, description, um, precio] , (err) => {
     if (err) {
@@ -54,7 +54,7 @@ const updGastn = (data , id , res) => {
 }
 
 const delGastn = (id,res) => {
-  let sql = "DELETE FROM gast WHERE id= $1";
+  let sql = "DELETE FROM gast WHERE id= ?";
   db.run(sql,[id], (err) => {
     if (err) {
       console.log(err);
@@ -65,21 +65,6 @@ const delGastn = (id,res) => {
   })
 }
 
-const getByName = (codigo,res) => {
-  let sql = "SELECT * FROM gast WHERE codigo= $1";
- db.get(sql,[codigo],(err , data) => {
-    if(err){
-      console.log(err);
-      throw err;
-    }
-    console.log(data)
-    
-    //res.send(data);
-
-  })
-  console.log(b);
-}
-
   module.exports = {
-    ReadAll: readAll,getById,addGastn,updGastn,delGastn,getByName
+    ReadAll: readAll,getById,addGastn,updGastn,delGastn
   };
