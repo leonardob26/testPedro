@@ -1,7 +1,9 @@
 const express = require('express')
 var app = module.exports = express();
-//var app 
 const port = 3000
+const bp = require('body-parser')
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: true }))
 
 app.use('/gastn', require('./controllers/gastn'));
 

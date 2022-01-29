@@ -32,7 +32,7 @@ const addGastn = (data , res) => {
     if (err) {
       console.log(err);
       res.status(400).send(err);
-      throw err;
+      //throw err;
     }
     res.json(this.lastID);
   })

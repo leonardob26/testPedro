@@ -1,6 +1,8 @@
 const express = require('express');
 const db = require('../db/db');
 var gastn = express.Router();
+
+//var app 
 const gastnDB = require('../db/servicesDB')
 
 gastn.get('/', (req, res) => {
