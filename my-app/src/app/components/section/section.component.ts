@@ -1,3 +1,4 @@
+import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { MatGast } from 'src/app/model/MatGast.model';
 import { MatGastService } from 'src/app/services/mat-gast.service';
@@ -14,10 +15,14 @@ export class SectionComponent implements OnInit {
   lists:MatGast[] = [];
   currentIndex = -1;
   currentMG:MatGast = {};
+  message:string = this.lists.length === 0?"":"any";
   constructor( private fetchMG: MatGastService) { }
 
   ngOnInit(): void {
-    this.fetchMG.readAll().subscribe(data=>this.lists = data);
+    this.fetchMG.readAll().subscribe(data=> {
+      console.log(data);
+      this.lists = data
+    })
   }
   delete(){
     alert(this.currentMG.id);
@@ -25,7 +30,9 @@ export class SectionComponent implements OnInit {
       next: (res) => {
         console.log(res);
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        console.error(e);
+      }
     });
     this.eliminar = true;
 

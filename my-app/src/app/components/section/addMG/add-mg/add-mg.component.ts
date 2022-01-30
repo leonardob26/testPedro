@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { MatGast } from 'src/app/model/MatGast.model';
 import { MatGastService } from 'src/app/services/mat-gast.service';
 
@@ -12,8 +13,13 @@ export class AddMGComponent implements OnInit {
     codigo:'',
     description:'',
     um:'',
-    precio:0
+    precio:undefined
   }
+
+  codigo = new FormControl('',[Validators.required,Validators.minLength(4)]);
+  description = new FormControl('',[Validators.required,Validators.minLength(4)]);
+  um = new FormControl('',[Validators.required]);
+  pre = new FormControl('',[Validators.required]);
   
   constructor(private add:MatGastService) { }
 
@@ -33,14 +39,16 @@ export class AddMGComponent implements OnInit {
     }
 
     console.log(JSON.stringify(this.matGast));
+    
     this.add.createMG(data).subscribe({
       next: (res:any) => {
         console.log(res);
-        
       },
       error: (e:any) => console.error(e)
     });
     this.redirectL();
   }
+    
+  
 
 }

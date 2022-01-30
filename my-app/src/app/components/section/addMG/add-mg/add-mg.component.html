@@ -1,16 +1,50 @@
 <div>
-  <input type="text" placeholder="Codigo" [(ngModel)] = "matGast.codigo" />
-  <input type="text" placeholder="Descripcion" [(ngModel)] = "matGast.description"/>
-  <select name="UM Selecionar" value [(ngModel)] = "matGast.um">
+  <div>
+  <input type="text" placeholder="Codigo" [(ngModel)] = "matGast.codigo" [formControl]= "codigo" required/>
+  <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)">
+    <div  *ngIf= "codigo.errors?.['required'] ">
+      <p style="color:red; border: 1px solid rgb(167, 5, 5);">El nombre es requerido</p>
+    </div>
+    <div *ngIf= "codigo.errors?.['minlength']">
+      <p style="color:red; border: 1px solid rgb(167, 5, 5);">Debe ser de al menos cuatro caracteres en adelante</p>
+    </div>
+  </div>
+</div>
+<div>
+  <input type="text" placeholder="Descripcion" [(ngModel)] = "matGast.description"  [formControl] = "description"/>
+  <div *ngIf="description.invalid && (description.dirty || description.touched)">
+    <div *ngIf= "description.errors?.['required'] ">
+      <p style="color:red; border: 1px solid rgb(167, 5, 5);">La descripcion es requerida</p>
+    </div>
+    <div *ngIf= "description.errors?.['minlength']">
+      <p style="color:red; border: 1px solid rgb(167, 5, 5);">Debe ser de al menos cuatro caracteres en adelante</p>
+    </div>
+  </div>
+</div>
+<div>
+  <select name="UM Selecionar" value [(ngModel)] = "matGast.um" [formControl]= "um">
     <option value="" selected disabled hidden>UM Selecionar</option>
     <option value="kg">Kg</option>
     <option value="Gg">Gg</option>
     <option value="Lbs">Lbs</option>
-    <option value="U">U</option>
+    <option value="u">u</option>
   </select>
-  <input placeholder="Precio" [(ngModel)] = "matGast.precio" />
+  <div *ngIf="um.invalid && (um.dirty || um.touched)">
+    <div *ngIf= "um.errors?.['required'] || um.value === 'UM Selecionar' || um.value === '' ">
+      <p style=" color:red; border: 1px solid rgb(167, 5, 5);">Debe Selecionar al menos alguna unidad de medida</p>
+    </div>
+  </div>
+</div>
+<div>
+  <input type="number" placeholder="Precio" [(ngModel)] = "matGast.precio" [formControl]= "pre"/>
+  <div *ngIf="pre.invalid && (pre.dirty || pre.touched)">
+    <div *ngIf= "pre.errors?.['required'] ">
+      <p style="color:red; border: 1px solid rgb(167, 5, 5);">El precio es requerido</p>
+    </div>
+  </div>
+</div>
   <div>
-<button (click)= "redirectL()">Cancelar</button>
-<button (click) = "submit()">Aceptar</button>
+<button (click)= "redirectL()"  >Cancelar</button>
+<button (click) = "submit()" [disabled] = "codigo.errors || description.errors || um.errors || pre.errors">Aceptar</button>
 </div>
 </div>

@@ -20,7 +20,7 @@
     <td>{{list.description}}</td>
     <td>{{list.um}}</td>
     <td>{{list.precio}}</td>
-    <td [class.active]="i == currentIndex" (click) = "setActiveMatGast(list,i)"><input type="checkbox" [disabled] = /></td>
+    <td><input [class.active]="i == currentIndex"  (click) = "setActiveMatGast(list,i)" type="checkbox" [disabled] = /></td>
   </tbody>
   <br/>
 </table>
@@ -36,4 +36,12 @@
 <div *ngIf= "eliminar">
   wiiiii eliminar
   <button (click)= "redirectL()">Back</button>
+</div>
+
+<div *ngIf="lists.length === 0 && message.length === 0">
+  <p>No tiene ningun producto</p>
+</div>
+
+<div *ngIf= "message.length !== 0 && lists.length === 0">
+  <p>{{message}}</p>
 </div>
