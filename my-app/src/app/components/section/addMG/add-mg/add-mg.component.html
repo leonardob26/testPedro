@@ -1,50 +1,39 @@
-<div>
+<div class="example-container">
+  <form [formGroup] = "profileForm"  (ngSubmit)="onSubmit()">
+    
+    <mat-form-field hintLabel="Max 10 characters" appearance="standard" >
+      <input matInput  type="text" maxlength="10" placeholder="Codigo" id="codigo" formControlName= "codigo" required />
+      <mat-hint align="end">{{profileForm.controls['codigo'].value?.length || 0}}/10</mat-hint>
+      <mat-error *ngIf="profileForm.controls['codigo'].invalid">{{getErrorMessageC()}}</mat-error>
+    </mat-form-field>
+ 
+  <mat-form-field appearance= "standard">
+  <input matInput type="text" placeholder="Descripcion" formControlName=  "description" required/>
+  <mat-error *ngIf= "profileForm.controls['description'].invalid">{{getErrorMessageD()}}</mat-error>
+</mat-form-field>
+
+<mat-form-field appearance= "standard">
+  <mat-label>Selecionar UM</mat-label>
+  <mat-select  formControlName= "um" required>
+    <mat-option value="kg">kg</mat-option>
+    <mat-option value="lts">lts</mat-option>
+    <mat-option value="u">u</mat-option>
+  </mat-select>
+  <mat-error *ngIf= "profileForm.controls['um'].invalid">{{getErrorMessageUM()}}</mat-error>
+</mat-form-field>
+
+<mat-form-field appearance= "standard" >
+  <input matInput type="number" placeholder="00.00" class="example-right-align"  formControlName= "pre" required/>
+  <span matPrefix>cup&nbsp;</span>
+  <mat-error *ngIf= "profileForm.controls['pre'].invalid">{{getErrorMessagePre()}}</mat-error>
+</mat-form-field>
+
+<br/>
+<br/>
+
   <div>
-  <input type="text" placeholder="Codigo" [(ngModel)] = "matGast.codigo" [formControl]= "codigo" required/>
-  <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)">
-    <div  *ngIf= "codigo.errors?.['required'] ">
-      <p style="color:red; border: 1px solid rgb(167, 5, 5);">El nombre es requerido</p>
-    </div>
-    <div *ngIf= "codigo.errors?.['minlength']">
-      <p style="color:red; border: 1px solid rgb(167, 5, 5);">Debe ser de al menos cuatro caracteres en adelante</p>
-    </div>
-  </div>
+<button mat-raised-button (click)= "redirectL()"  >Cancelar</button>
+<button mat-raised-button color="primary" (click) = "onSubmit()"  [disabled]="!profileForm.valid">Aceptar</button>
 </div>
-<div>
-  <input type="text" placeholder="Descripcion" [(ngModel)] = "matGast.description"  [formControl] = "description"/>
-  <div *ngIf="description.invalid && (description.dirty || description.touched)">
-    <div *ngIf= "description.errors?.['required'] ">
-      <p style="color:red; border: 1px solid rgb(167, 5, 5);">La descripcion es requerida</p>
-    </div>
-    <div *ngIf= "description.errors?.['minlength']">
-      <p style="color:red; border: 1px solid rgb(167, 5, 5);">Debe ser de al menos cuatro caracteres en adelante</p>
-    </div>
-  </div>
-</div>
-<div>
-  <select name="UM Selecionar" value [(ngModel)] = "matGast.um" [formControl]= "um">
-    <option value="" selected disabled hidden>UM Selecionar</option>
-    <option value="kg">Kg</option>
-    <option value="Gg">Gg</option>
-    <option value="Lbs">Lbs</option>
-    <option value="u">u</option>
-  </select>
-  <div *ngIf="um.invalid && (um.dirty || um.touched)">
-    <div *ngIf= "um.errors?.['required'] || um.value === 'UM Selecionar' || um.value === '' ">
-      <p style=" color:red; border: 1px solid rgb(167, 5, 5);">Debe Selecionar al menos alguna unidad de medida</p>
-    </div>
-  </div>
-</div>
-<div>
-  <input type="number" placeholder="Precio" [(ngModel)] = "matGast.precio" [formControl]= "pre"/>
-  <div *ngIf="pre.invalid && (pre.dirty || pre.touched)">
-    <div *ngIf= "pre.errors?.['required'] ">
-      <p style="color:red; border: 1px solid rgb(167, 5, 5);">El precio es requerido</p>
-    </div>
-  </div>
-</div>
-  <div>
-<button (click)= "redirectL()"  >Cancelar</button>
-<button (click) = "submit()" [disabled] = "codigo.errors || description.errors || um.errors || pre.errors">Aceptar</button>
-</div>
+</form>
 </div>

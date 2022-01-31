@@ -2,10 +2,12 @@
 
 <div *ngIf= "!add && !editar && !eliminar">
   <div>
-    <button (click) = "add = true">Adicionar</button>
-    <button [disabled]= "currentIndex === -1" (click)= "delete()" >Eliminar</button>
-    <button [disabled]= "currentIndex === -1" (click)= "editar = true" >Editar</button>
+    <button mat-raised-button (click) = "add = true ">Adicionar</button>
+    <button mat-raised-button [disabled]= "currentIndex === -1" (click)= "showConfirmationPrompt()" >Eliminar</button>
+    <button mat-raised-button [disabled]= "currentIndex === -1" (click)= "editar = true" >Editar</button>
   </div>
+  <mat-card>
+    <mat-card-content>
   <table>
   <thead>
     <th>Codigo</th>
@@ -24,6 +26,9 @@
   </tbody>
   <br/>
 </table>
+</mat-card-content>
+</mat-card>
+
 </div>
 <div *ngIf = "add">
   <app-add-mg></app-add-mg>
@@ -45,3 +50,4 @@
 <div *ngIf= "message.length !== 0 && lists.length === 0">
   <p>{{message}}</p>
 </div>
+<button (click)= "showAlertS()">alert</button>
